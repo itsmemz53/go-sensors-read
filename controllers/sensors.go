@@ -9,7 +9,7 @@ import (
 )
 
 type PostReadingBody struct {
-	RequestId  string `json:"request_id" binding:"required"`
+	RequestId  int64 `json:"request_id" binding:"required"`
 	Data string `json:"data" binding:"required"`
 	SensorId int64 `json:"sensor_id" binding:"required"`
 }
@@ -88,7 +88,7 @@ func PostSensorReadings(c *gin.Context) {
 	}
 
 	// Create sensor
-	reading := models.Readings{RequestId: input.RequestId, Data: input.Data, Sensors: &sensorExist}
+	reading := models.Readings{RequestId: input.RequestId, Data: input.Data, Sensor: &sensorExist}
 	models.DB.Create(&reading)
 
 	c.JSON(http.StatusOK, gin.H{"data": reading})
