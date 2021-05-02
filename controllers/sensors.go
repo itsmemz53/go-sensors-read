@@ -3,7 +3,6 @@ package controllers
 
 import (
 	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/itsmemz53/go-sensors-read/models"
 )
@@ -24,7 +23,6 @@ type PostSensorBody struct {
 func GetAllSensors(c *gin.Context) {
 	var sensors []models.Sensors
 	models.DB.Find(&sensors)
-
 	c.JSON(http.StatusOK, gin.H{"data": sensors})
 }
 
@@ -88,7 +86,7 @@ func PostSensorReadings(c *gin.Context) {
 	}
 
 	// Create sensor
-	reading := models.Readings{RequestId: input.RequestId, Data: input.Data, Sensor: &sensorExist}
+	reading := models.Readings{RequestId: input.RequestId, Data: input.Data, SensorId: sensorExist.Id}
 	models.DB.Create(&reading)
 
 	c.JSON(http.StatusOK, gin.H{"data": reading})

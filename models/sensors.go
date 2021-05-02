@@ -8,7 +8,7 @@ type Sensors struct {
 
 
 type Readings struct {
-	Sensor  *Sensors `json:"sensor"`
-	RequestId  int64 `json:"requestId" gorm:"primary_key"`
+	RequestId  int64 `json:"request_id" gorm:"primary_key"`
+	SensorId  int64 `json:"sensor_id" sql:"type:int64 REFERENCES sensors(id)"`
 	Data 	string `json:"data"`
 }
